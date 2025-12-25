@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Navidad Cyndhia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto de nieve */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            animation: fall linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        /* Tarjeta principal - Desktop */
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 210mm;
+            min-height: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            animation: fadeIn 1.5s ease-in;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            z-index: 1;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            padding: 25px 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: "❄️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: -30px;
+            left: -20px;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .card-header::after {
+            content: "❄️";
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            bottom: -20px;
+            right: -10px;
+            animation: rotate 15s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .ornament {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 28px;
+            animation: swing 3s ease-in-out infinite;
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: clamp(24px, 6vw, 36px);
+            margin: 8px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        .name {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            font-size: clamp(20px, 5vw, 28px);
+            font-style: italic;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            margin-top: 5px;
+        }
+        
+        .card-body {
+            flex: 1;
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Sección de foto */
+        .photo-section {
+            text-align: center;
+            margin: 0 0 20px 0;
+            position: relative;
+        }
+        
+        .photo-frame {
+            display: inline-block;
+            position: relative;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: glow 3s ease-in-out infinite;
+            max-width: 100%;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6); }
+        }
+        
+        .photo-inner {
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .photo {
+            width: 100%;
+            max-width: 380px;
+            height: 240px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .photo-placeholder {
+            text-align: center;
+        }
+        
+        .photo-placeholder-icon {
+            font-size: 50px;
+            margin-bottom: 8px;
+        }
+        
+        .corner-decoration {
+            position: absolute;
+            font-size: 22px;
+            z-index: 2;
+        }
+        
+        .corner-decoration.top-left { top: -8px; left: -8px; }
+        .corner-decoration.top-right { top: -8px; right: -8px; }
+        .corner-decoration.bottom-left { bottom: -8px; left: -8px; }
+        .corner-decoration.bottom-right { bottom: -8px; right: -8px; }
+        
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c41e3a, transparent);
+            margin: 18px auto;
+        }
+        
+        .message {
+            color: #2c3e50;
+            line-height: 1.7;
+            font-size: clamp(14px, 3.5vw, 15px);
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 300;
+        }
+        
+        .message-highlight {
+            color: #c41e3a;
+            font-weight: 700;
+            font-style: italic;
+        }
+        
+        .quote {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+            border-left: 4px solid #c41e3a;
+            padding: 15px 20px;
+            margin: 18px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+            font-size: clamp(13px, 3vw, 14px);
+        }
+        
+        .closing {
+            text-align: center;
+            margin-top: 18px;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f7c3f 0%, #0a5c2e 100%);
+            border-radius: 12px;
+            color: white;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: 400;
+            line-height: 1.6;
+            box-shadow: 0 8px 25px rgba(15, 124, 63, 0.3);
+        }
+        
+        .closing-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            text-align: center;
+            font-size: clamp(22px, 5vw, 28px);
+            margin: 18px 0 15px;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 18px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-style: italic;
+            color: #666;
+            font-size: clamp(12px, 3vw, 13px);
+        }
+        
+        .footer-hearts {
+            color: #c41e3a;
+            font-size: 18px;
+            margin-top: 8px;
+        }
+        
+        /* ============================================
+           RESPONSIVE - TABLET (768px - 1024px)
+           ============================================ */
+        @media screen and (max-width: 1024px) {
+            body {
+                padding: 15px;
+                align-items: flex-start;
+            }
+            
+            .card {
+                max-width: 100%;
+                border-radius: 10px;
+            }
+            
+            .card-header {
+                padding: 20px 25px 18px;
+            }
+            
+            .card-header::before {
+                font-size: 80px;
+            }
+            
+            .card-header::after {
+                font-size: 70px;
+            }
+            
+            .ornament {
+                font-size: 24px;
+                gap: 10px;
+            }
+            
+            .card-body {
+                padding: 20px 25px;
+            }
+            
+            .photo {
+                max-width: 320px;
+                height: 200px;
+            }
+            
+            .corner-decoration {
+                font-size: 18px;
+            }
+        }
+        
+        /* ============================================
+           RESPONSIVE - MÓVIL GRANDE (481px - 767px)
+           ============================================ */
+        @media screen and (max-width: 767px) {
+            body {
+                padding: 10px;
+                min-height: 100vh;
+                align-items: flex-start;
+            }
+            
+            .snowflake {
+                font-size: 0.8em;
+            }
+            
+            .card {
+                border-radius: 8px;
+                margin: 0;
+            }
+            
+            .card-header {
+                padding: 18px 20px 15px;
+            }
+            
+            .card-header::before {
+                font-size: 60px;
+                top: -15px;
+                left: -10px;
+            }
+            
+            .card-header::after {
+                font-size: 50px;
+                bottom: -10px;
+                right: -5px;
+            }
+            
+            .ornament {
+                font-size: 22px;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+            
+            .card-body {
+                padding: 18px 20px;
+            }
+            
+            .photo-frame {
+                padding: 10px;
+            }
+            
+            .photo {
+                max-width: 280px;
+                height: 180px;
+            }
+            
+            .photo-inner {
+                padding: 6px;
+            }
+            
+            .corner-decoration {
+                font-size: 16px;
+            }
+            
+            .corner-decoration.top-left { top: -6px; left: -6px; }
+            .corner-decoration.top-right { top: -6px; right: -6px; }
+            .corner-decoration.bottom-left { bottom: -6px; left: -6px; }
+            .corner-decoration.bottom-right { bottom: -6px; right: -6px; }
+            
+            .divider {
+                width: 60px;
+                margin: 15px auto;
+            }
+            
+            .quote {
+                padding: 12px 15px;
+                margin: 15px 0;
+            }
+            
+            .closing {
+                padding: 16px;
+                margin-top: 15px;
+            }
+            
+            .stars {
+                margin: 15px 0 12px;
+            }
+            
+            .footer {
+                padding: 15px;
+            }
+            
+            .footer-hearts {
+                font-size: 16px;
+            }
+        }
+        
+        /* ============================================
+           RESPONSIVE - MÓVIL PEQUEÑO (hasta 480px)
+           ============================================ */
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .snowflake {
+                font-size: 0.7em;
+            }
+            
+            .card {
+                border-radius: 6px;
+            }
+            
+            .card-header {
+                padding: 15px 15px 12px;
+            }
+            
+            .card-header::before {
+                font-size: 45px;
+                top: -10px;
+                left: -5px;
+            }
+            
+            .card-header::after {
+                font-size: 40px;
+                bottom: -8px;
+                right: 0;
+            }
+            
+            .ornament {
+                font-size: 20px;
+                gap: 6px;
+                margin-bottom: 8px;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .photo-frame {
+                padding: 8px;
+                border-radius: 10px;
+            }
+            
+            .photo {
+                max-width: 100%;
+                height: 160px;
+            }
+            
+            .photo-inner {
+                padding: 5px;
+                border-radius: 8px;
+            }
+            
+            .corner-decoration {
+                font-size: 14px;
+            }
+            
+            .corner-decoration.top-left { top: -5px; left: -5px; }
+            .corner-decoration.top-right { top: -5px; right: -5px; }
+            .corner-decoration.bottom-left { bottom: -5px; left: -5px; }
+            .corner-decoration.bottom-right { bottom: -5px; right: -5px; }
+            
+            .divider {
+                width: 50px;
+                margin: 12px auto;
+            }
+            
+            .message {
+                margin: 12px 0;
+                line-height: 1.6;
+            }
+            
+            .quote {
+                padding: 10px 12px;
+                margin: 12px 0;
+                border-left-width: 3px;
+            }
+            
+            .closing {
+                padding: 14px 12px;
+                margin-top: 12px;
+                border-radius: 10px;
+            }
+            
+            .stars {
+                margin: 12px 0 10px;
+            }
+            
+            .footer {
+                padding: 12px;
+            }
+            
+            .footer-hearts {
+                font-size: 14px;
+                margin-top: 6px;
+            }
+        }
+        
+        /* ============================================
+           RESPONSIVE - MÓVIL MUY PEQUEÑO (hasta 360px)
+           ============================================ */
+        @media screen and (max-width: 360px) {
+            body {
+                padding: 5px;
+            }
+            
+            .card-header {
+                padding: 12px 12px 10px;
+            }
+            
+            .ornament {
+                font-size: 18px;
+            }
+            
+            .card-body {
+                padding: 12px;
+            }
+            
+            .photo {
+                height: 140px;
+            }
+            
+            .photo-frame {
+                padding: 6px;
+            }
+            
+            .corner-decoration {
+                font-size: 12px;
+            }
+            
+            .closing {
+                padding: 12px 10px;
+            }
+        }
+        
+        /* ============================================
+           ESTILOS DE IMPRESIÓN
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .card {
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                max-width: 210mm;
+                page-break-after: avoid;
+                border-radius: 0;
+            }
+            
+            .snowflake {
+                display: none;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Efecto de nieve -->
+    <div class="snowflake" style="left: 10%; animation-duration: 10s; animation-delay: 0s;">❄</div>
+    <div class="snowflake" style="left: 20%; animation-duration: 12s; animation-delay: 2s;">❅</div>
+    <div class="snowflake" style="left: 30%; animation-duration: 8s; animation-delay: 4s;">❆</div>
+    <div class="snowflake" style="left: 40%; animation-duration: 14s; animation-delay: 1s;">❄</div>
+    <div class="snowflake" style="left: 50%; animation-duration: 11s; animation-delay: 3s;">❅</div>
+    <div class="snowflake" style="left: 60%; animation-duration: 9s; animation-delay: 5s;">❆</div>
+    <div class="snowflake" style="left: 70%; animation-duration: 13s; animation-delay: 2s;">❄</div>
+    <div class="snowflake" style="left: 80%; animation-duration: 10s; animation-delay: 4s;">❅</div>
+    <div class="snowflake" style="left: 90%; animation-duration: 12s; animation-delay: 1s;">❆</div>
+
+    <div class="card">
+        <!-- Encabezado -->
+        <div class="card-header">
+            <div class="ornament">
+                🎄 ⭐ 🎄
+            </div>
+            <h1>Feliz Navidad</h1>
+            <div class="name">Cyndhia</div>
+        </div>
+        
+        <!-- Cuerpo -->
+        <div class="card-body">
+            
+            <!-- Sección de foto -->
+            <div class="photo-section">
+                <div class="photo-frame">
+                    <div class="corner-decoration top-left">🎀</div>
+                    <div class="corner-decoration top-right">🎁</div>
+                    <div class="corner-decoration bottom-left">🔔</div>
+                    <div class="corner-decoration bottom-right">⭐</div>
+                    
+                    <div class="photo-inner">
+                        <div class="photo">
+                            <img src="WhatsApp_Image_2025-12-24_at_07.48.52-removebg-preview.png" alt="Foto Navideña de Cyndhia" 
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div class="photo-placeholder" style="display: none;">
+                                <div class="photo-placeholder-icon">📷</div>
+                                <div>Coloca aquí tu foto navideña</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- Mensaje -->
+            <div class="message">
+                En esta Navidad, recuerda que la <span class="message-highlight">verdadera magia</span> no está en los regalos, sino en los abrazos, las risas y esos momentos junto a tu hijita que quedan grabados para siempre en el corazón.
+            </div>
+            
+            <div class="quote">
+                "La familia es el regalo más grande que la vida nos puede dar. Cada momento compartido es un tesoro invaluable que el tiempo no puede borrar."
+            </div>
+            
+            <div class="message">
+                Que disfrutes cada segundo con tu familia, que la paz llene tu hogar y que este tiempo juntas sea un hermoso recordatorio de lo afortunada que eres de tener a quienes amas cerca.
+            </div>
+            
+            <!-- Cierre -->
+            <div class="closing">
+                <div class="closing-title">🌟 Mis Deseos Para Ti 🌟</div>
+                Que sea un tiempo lleno de amor,<br>
+                alegría y bendiciones para ti<br>
+                y toda tu hermosa familia
+            </div>
+            
+            <div class="stars">✨ ⭐ ✨ 🌟 ✨</div>
+        </div>
+        
+        <!-- Pie -->
+        <div class="footer">
+            Con todo mi cariño en esta Navidad 2024
+            <div class="footer-hearts">💝 ❤️ 💝</div>
+        </div>
+    </div>
+</body>
+</html>
